@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+	<title>heartCollect</title>
+	<meta charset="utf-8">
+
+	<style type="text/css">
+		#heart{
+			position: absolute;
+			width: 100px;
+			height: 100px;
+			left: 0px;
+			overflow: hidden;
+      cursor: pointer;
+		}
+/*		.Img{
+			position: absolute;
+			left: 0px;
+		}
+		#Img{
+			position: absolute;
+			left: 0px;
+		}*/
+		.content{
+			position: absolute;
+			margin-top: 200px;
+			left: 0px;
+			overflow: hidden;
+		}
+		#Img{
+      position: absolute;
+      left: 0px;
+		}
+    button{
+      width: 100px;
+      height: 50px;
+      margin-left: 15px;
+      border-radius: 7px;
+      border: 1px solid #f35626;
+      background-image:linear-gradient(92deg,#f35626,#feab3a);
+      font-size: 20px;
+      cursor: pointer;
+      margin-bottom: 20px;
+      margin-right: 20px;
+      outline: none;
+    }
+	</style>
+</head>
+<body>
+  <div id="heart">
+    <img src="images/collect_1_5100w_100h.png" id="Img">
+  </div>
+  <div class="content">
+  <p>请选择图形按钮</p>
+  <button>收藏一</button>
+  <button>收藏二</button>
+  <button>收藏三</button>
+  <button>点赞一</button>
+  <button>点赞二</button>
+  <button>点赞三</button>
+  </div>
+  <script type="text/javascript">
+  	window.onload=function () {
+    		var heart = document.getElementById('heart');
+        // var Img = document.getElementsByClassName('Img')[0];
+        var Img = document.getElementById('Img');
+        var btn =document.getElementsByTagName('button');
+        // console.log(Img[0])
+        var Arr=['images/collect_1_5100w_100h.png','images/collect_2_4000w_100h.png','images/collect_3_3400w_100h.png','images/like_1_4000w_100h.png','images/like_2_10100w_100h.png','images/like_3_3000w_100h.png'];
+        for(i=0;i<btn.length;i++){
+          btn[i].index=i;
+          btn[i].onclick=function(){
+            for (var j = 0; j<btn.length; j++) {
+              if (this.index == j) {
+                btn[j].style.backgroundImage="linear-gradient(92deg,#feab3a,#f35626)";
+              }else{
+                btn[j].style.backgroundImage="linear-gradient(92deg,#f35626,#feab3a)";
+              }
+            }
+
+            // if(this.style.backgroundImage="linear-gradient(92deg,#f35626,#feab3a)") {
+            // //ed
+
+            // }else{
+            // this.style.backgroundImage="linear-gradient(92deg,#f35626,#feab3a)";//nor
+          // }
+            Img.src=Arr[this.index];       
+            console.log(Arr[this.index]);
+          }
+            
+
+        }
+          var motion=function(){
+          heart.removeEventListener('click',motion)
+          Img.style.left='0px';
+          var t=setInterval(function() {
+            if (parseInt(Img.style.left.replace('px','')) > -3800) {
+              Img.style.left=parseInt(Img.style.left.replace('px',''))-100+'px';
+            }else{
+                        
+              heart.addEventListener('click',cancel)
+
+              clearInterval(t);
+            }
+          }, 30);
+        }
+        var cancel =function () {
+          heart.removeEventListener('click',cancel);
+          heart.addEventListener('click',motion);
+          // Img.style.left='-3900px'
+          // var t=setInterval(function () {
+          //  if (parseInt(Img.style.left.replace('px','')) <100) {
+          //    Img.style.left=parseInt(Img.style.left.replace('px',''))+100+'px';
+          //  }else{
+          //    heart.addEventListener('click',motion);
+          //    clearInterval(t);
+          //    Img.style.left='0px'
+          //  }
+          // },30);
+          Img.style.left ='0px';
+        }
+        heart.addEventListener('click',motion);
+        
+        // if (heart.addEventListener('click',motion)) {
+        //  heart.removeEventListener('click',cancel);
+        // }else{
+        //  heart.addEventListener('click',motion);
+        // }        
+  	}
+
+  </script>
+</body>
+</html>
+
